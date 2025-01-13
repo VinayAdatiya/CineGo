@@ -29,4 +29,8 @@ public class Theatre {
     public static List<Movie> getMovieList() {
         return movieList;
     }
+
+    public static List<Screen> getScreenList() {
+        return screenList;
+    }
 }
