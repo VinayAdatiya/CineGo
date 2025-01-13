@@ -24,11 +24,10 @@ public class Show {
 
     public void displayShowDetails() {
         System.out.println("Show ID: " + showID);
+        System.out.println("Movie: " + movie.getTitle());
         System.out.println("Date: " + showDate);
         System.out.println("Time: " + showTime);
-        System.out.println("Movie: " + movie.getTitle());
         System.out.println("Screen: " + screen.getScreenType());
-        System.out.println("Available Seats: " + getAvailableSeats());
     }
 
     public int getAvailableSeats() {
@@ -41,18 +40,17 @@ public class Show {
         return count;
     }
 
-    public boolean bookSeat(String seatNumber) {
-        for (int i = 0; i < seats.size(); i++) {
-            if(seats.get(i).getSeatNumber().equals(seatNumber) && !seats.get(i).isBooked()){
-                seats.get(i).setBooked(true);
-                return true;
+    public double bookSeat(List<String> seatNumbers) {
+        double totalPrice = 0;
+        for (int i = 0; i < seatNumbers.size(); i++) {
+            for (int j = 0; j < seats.size(); j++) {
+                if (seats.get(j).getSeatNumber().equals(seatNumbers.get(i)) && !seats.get(j).isBooked()) {
+                    seats.get(j).setBooked(true);
+                    totalPrice = totalPrice + seats.get(j).getPrice();
+                }
             }
         }
-        return false;
-    }
-
-    public List<Seat> getSeats() {
-        return seats;
+        return totalPrice;
     }
 
     public void displaySeats() {
@@ -60,5 +58,53 @@ public class Show {
         for (Seat seat : seats) {
             System.out.println("Seat: " + seat.getSeatNumber() + " | Type: " + seat.getSeatType() + " | Booked: " + seat.isBooked());
         }
+    }
+
+    public String getShowID() {
+        return showID;
+    }
+
+    public void setShowID(String showID) {
+        this.showID = showID;
+    }
+
+    public LocalDate getShowDate() {
+        return showDate;
+    }
+
+    public void setShowDate(LocalDate showDate) {
+        this.showDate = showDate;
+    }
+
+    public LocalTime getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(LocalTime showTime) {
+        this.showTime = showTime;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(Screen screen) {
+        this.screen = screen;
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }

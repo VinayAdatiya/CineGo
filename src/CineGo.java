@@ -40,26 +40,25 @@ public class CineGo {
         Theatre theatre = new Theatre("theatre001", "Cineplex", "8.5", "Main Street", "Downtown", "City", "State", 123456);
         Screen screen1 = new Screen("SC001", 1, "IMAX", 10);
         Screen screen2 = new Screen("SC002", 2, "2D", 10);
-        Screen screen3 = new Screen("SC003", 3, "4DX", 10);
 
         // Adding a show
         Movie inception = Theatre.getMovieList().get(0);
         Show show1 = new Show("SH001", LocalDate.now(), LocalTime.of(18, 30), inception, screen1);
-        show1.displayShowDetails();
 
-        // Display and book seats
-        System.out.println("\nDisplaying seats:");
-        show1.displaySeats();
+        //New Customer added
+        Customer cs = new Customer("Raj","Shah","raj","raj123","cs001","raj@gmail.com","Surat",395009);
 
-        System.out.println("\nBooking a seat:");
-        if (show1.bookSeat("A1")) {
-            System.out.println("Seat A1 booked successfully.");
-        } else {
-            System.out.println("Failed to book seat A1.");
-        }
+        //Customer Printing Show Details
+        cs.getShowDetails();
 
-        // Display seats after booking
-        System.out.println("\nSeats after booking:");
-        show1.displaySeats();
+        //Show Available Seats
+        cs.showAvailableSeats(show1);
+
+        //Booking a Ticket
+        Booking ticket1 = cs.bookTicket(show1,Arrays.asList("A1","A2"));
+        cs.getTicketDetails(ticket1);
+
+        //After Booking Show Available Seats
+        cs.showAvailableSeats(show1);
     }
 }
