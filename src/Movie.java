@@ -5,111 +5,112 @@ import java.util.List;
 
 public class Movie {
 
-    static List<Show> showList = new ArrayList<>();
-
+    private String movieID;
     private String title;
     private List<String> genre;
     private LocalTime duration;
     private List<String> language;
     private LocalDate releaseDate;
     private float rating;
-    private String Description;
+    private String description;
     private List<String> format;
     private List<MovieTeam> movieTeam;
-    private String movieID;
+    private List<Show> showList = new ArrayList<>();
 
-    public Movie(String title, List<String> genre, LocalTime duration, List<String> language, LocalDate releaseDate, float rating, String description, List<String> format, List<MovieTeam> mt, String movieID) {
-        this.title = title;
-        this.genre = genre;
-        this.duration = duration;
-        this.language = language;
-        this.releaseDate = releaseDate;
-        this.rating = rating;
-        this.Description = description;
-        this.format = format;
-        this.movieTeam = mt;
-        this.movieID = movieID;
+    private Movie(Builder builder) {
+        this.movieID = builder.movieID;
+        this.title = builder.title;
+        this.genre = builder.genre;
+        this.duration = builder.duration;
+        this.language = builder.language;
+        this.releaseDate = builder.releaseDate;
+        this.rating = builder.rating;
+        this.description = builder.description;
+        this.format = builder.format;
+        this.movieTeam = builder.movieTeam;
+    }
 
-        Theatre.movieList.add(this);
+    public void addShow(Show show) {
+        showList.add(show);
+    }
+
+    //Getter methods
+    public String getMovieID() {
+        return movieID;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public List<Show> getShowList() {
+        return showList;
     }
 
-    public List<String> getGenre() {
-        return genre;
-    }
+    public static class Builder {
+        private String movieID;
+        private String title;
+        private List<String> genre;
+        private LocalTime duration;
+        private List<String> language;
+        private LocalDate releaseDate;
+        private float rating;
+        private String description;
+        private List<String> format;
+        private List<MovieTeam> movieTeam;
 
-    public void setGenre(List<String> genre) {
-        this.genre = genre;
-    }
+        public Builder setMovieID(String movieID) {
+            this.movieID = movieID;
+            return this;
+        }
 
-    public LocalTime getDuration() {
-        return duration;
-    }
+        public Builder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
 
-    public void setDuration(LocalTime duration) {
-        this.duration = duration;
-    }
+        public Builder setGenre(List<String> genre) {
+            this.genre = genre;
+            return this;
+        }
 
-    public List<String> getLanguage() {
-        return language;
-    }
+        public Builder setDuration(LocalTime duration) {
+            this.duration = duration;
+            return this;
+        }
 
-    public void setLanguage(List<String> language) {
-        this.language = language;
-    }
+        public Builder setLanguage(List<String> language) {
+            this.language = language;
+            return this;
+        }
 
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
+        public Builder setReleaseDate(LocalDate releaseDate) {
+            this.releaseDate = releaseDate;
+            return this;
+        }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
-    }
+        public Builder setRating(float rating) {
+            this.rating = rating;
+            return this;
+        }
 
-    public float getRating() {
-        return rating;
-    }
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
 
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
+        public Builder setFormat(List<String> format) {
+            this.format = format;
+            return this;
+        }
 
-    public String getDescription() {
-        return Description;
-    }
+        public Builder setMovieTeam(List<MovieTeam> movieTeam) {
+            this.movieTeam = movieTeam;
+            return this;
+        }
 
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public List<String> getFormat() {
-        return format;
-    }
-
-    public void setFormat(List<String> format) {
-        this.format = format;
-    }
-
-    public String getMovieID() {
-        return movieID;
-    }
-
-    public void setMovieID(String movieID) {
-        this.movieID = movieID;
-    }
-
-    public List<MovieTeam> getMovieTeam() {
-        return movieTeam;
-    }
-
-    public void setMovieTeam(List<MovieTeam> movieTeam) {
-        this.movieTeam = movieTeam;
+        public Movie build() {
+            return new Movie(this);
+        }
     }
 }

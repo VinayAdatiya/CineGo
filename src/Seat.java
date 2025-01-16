@@ -1,22 +1,27 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public abstract class Seat {
     private String seatNumber;
     private boolean isBooked;
-    private double price;
+    private double basePrice;
 
-    public Seat(String seatNumber, double price) {
-        this.seatNumber = seatNumber;
+    public Seat(String seatLabel, double basePrice) {
+        this.seatNumber = seatLabel;
         this.isBooked = false;
-        this.price = price;
+        this.basePrice = basePrice;
     }
+
+    // Abstract method for calculating price, including taxes
+    public abstract double calculatePrice(LocalDate showDate, LocalTime showTime);
+
+    // Abstract method to calculate taxes
+    protected abstract double calculateTaxes(double price);
 
     public abstract String getSeatType();
 
     public String getSeatNumber() {
         return seatNumber;
-    }
-
-    public void setSeatNumber(String seatNumber) {
-        this.seatNumber = seatNumber;
     }
 
     public boolean isBooked() {
@@ -27,11 +32,7 @@ public abstract class Seat {
         isBooked = booked;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public double getBasePrice() {
+        return basePrice;
     }
 }

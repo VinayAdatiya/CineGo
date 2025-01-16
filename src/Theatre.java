@@ -3,8 +3,9 @@ import java.util.List;
 
 public class Theatre {
 
-    static List<Movie> movieList = new ArrayList<>();
-    static List<Screen> screenList = new ArrayList<>();
+    private List<Movie> movieList = new ArrayList<>();
+    private List<Show> showList = new ArrayList<>();
+    private List<Screen> screenList = new ArrayList<>();
 
     private String theatreID;
     private String theatreName;
@@ -26,11 +27,21 @@ public class Theatre {
         this.pinCode = pinCode;
     }
 
-    public static List<Movie> getMovieList() {
+    public List<Movie> getMovieList() {
         return movieList;
     }
 
-    public static List<Screen> getScreenList() {
-        return screenList;
+    public void addMovie(Movie movie){
+        movieList.add(movie);
+    }
+
+    public void addScreen(Screen screen) {
+        screenList.add(screen);
+    }
+
+    public void addShow(Show show) {
+        showList.add(show);
+        Movie movie = show.getMovie();
+        movie.addShow(show);
     }
 }

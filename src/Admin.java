@@ -5,45 +5,33 @@ import java.util.List;
 
 public class Admin extends Users{
 
-    // admin object list
-    static List<Admin> adminList = new ArrayList<>();
+    private Theatre theatre = null;
 
-    // static block for initializing first object in the list
-    static {
-        Admin a1 = new Admin("Vinay","Adatiya","Admin01","ad@001","ad001","admin.CineGo@gmail.com","Surat",395009);
-        adminList.add(a1);
-    }
-
-    // Admin Constructor with super()
-    public Admin(String firstName, String lastName, String userName, String password, String customerID, String emailID, String city, int pinCode) {
+    // Admin Constructor
+    public Admin(String firstName, String lastName, String userName, String password, String customerID, String emailID, String city, int pinCode, Theatre theatre) {
         super(firstName, lastName, userName, password, customerID, emailID, city, pinCode);
+        this.theatre = theatre;
     }
 
-    // static adminLogin method so that we can call it from the main CineGo Class
-    static Admin adminLogin(String userName,String password){
-        for (int i = 0; i < adminList.size(); i++) {
-            if(adminList.get(i).getUserName() == userName  &&  adminList.get(i).getPassword() == password){
-                return adminList.get(i);
-            }
-        }
-        return null;
+
+    // Add Movie
+     public void addMovie(Movie movie){
+       theatre.addMovie(movie);
     }
 
-    // addMovie using any one of the admin object
-     public boolean addMovie(String title, List<String> genre, LocalTime duration, List<String> language, LocalDate releaseDate, float rating, String description, List<String> format, List<MovieTeam> mt, String movieID){
-        Movie movie = new Movie(title,genre,duration,language,releaseDate,rating,description,format,mt,movieID);
-        if(movie != null){
-            return true;
-        }
-        else{
-            return false;
-        }
+    // Add Screen
+    public void addScreen(Screen screen) {
+        theatre.addScreen(screen);
+    }
+
+    // Add Show
+    public void addShow(Show show){
+        theatre.addShow(show);
     }
 
     // Printing all movies title and id for admin
-    @Override
     public void getAllMovies(){
-        List<Movie> movies = Theatre.getMovieList();
+        List<Movie> movies = theatre.getMovieList();
         System.out.println("----------------");
         System.out.println("Movie ID | Title");
         for (int i = 0; i < movies.size(); i++) {
@@ -55,15 +43,12 @@ public class Admin extends Users{
 
     //removeMovie
     public void removeMovie(String movieID){
-        for (int i = 0; i < Theatre.getMovieList().size(); i++) {
-            if(Theatre.getMovieList().get(i).getMovieID() == movieID){
+        for (int i = 0; i < theatre.getMovieList().size(); i++) {
+            if(theatre.getMovieList().get(i).getMovieID() == movieID){
                 System.out.println(movieID+" Removed Successfully");
-                Theatre.getMovieList().remove(i);
+                theatre.getMovieList().remove(i);
             }
         }
     }
 
-    public void addShow(){
-
-    }
 }

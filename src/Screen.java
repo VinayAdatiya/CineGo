@@ -16,7 +16,6 @@ public class Screen {
         this.shows = new ArrayList<>();
         this.noOfSeats = noOfSeats;
         this.seats = initializeSeats(noOfSeats);
-        Theatre.screenList.add(this);
     }
 
     public List<Seat> initializeSeats(int noOfSeats){
