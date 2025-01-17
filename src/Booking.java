@@ -6,13 +6,13 @@ public class Booking {
     private Show show;
     private List<String> bookedSeats;
     private double totalPrice;
-    private Users user;
+//    private Users user;
 
-    public Booking(String bookingID, Show show, List<String> bookedSeats, Users user , double totalPrice) {
+    public Booking(String bookingID, Show show, List<String> bookedSeats,  double totalPrice) {
         this.bookingID = bookingID;
         this.show = show;
         this.bookedSeats = bookedSeats;
-        this.user = user;
+//        this.user = user;
         this.totalPrice = totalPrice;
     }
 

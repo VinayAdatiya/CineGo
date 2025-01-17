@@ -2,10 +2,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class RegularSeat extends Seat {
-    private final double taxRate = 0.05;
 
-    public RegularSeat(String seatNumber, double price) {
-        super(seatNumber, price);
+    public RegularSeat(String seatNumber, double price,double taxRate) {
+        super(seatNumber, price ,taxRate);
     }
 
     @Override
@@ -18,11 +17,6 @@ public class RegularSeat extends Seat {
         }
 
         return price;
-    }
-
-    @Override
-    protected double calculateTaxes(double price) {
-        return price * taxRate;
     }
 
     @Override

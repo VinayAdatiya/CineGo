@@ -9,7 +9,7 @@ public class CineGo {
         // Initializing Theatre
         Theatre theatre = new Theatre("theatre001", "Cineplex", "8.5", "Main Street", "Downtown", "City", "State", 123456);
 
-        // Assigning Admin to theatre
+        // Assigning Admin
         Admin admin = new Admin("Vinay", "Adatiya", "admin", "admin@123", "ad001", "admin@gemail.com", "Surat", 395009, theatre);
 
         // Adding screen
@@ -78,9 +78,12 @@ public class CineGo {
         cs.bookingPreview(show1, Arrays.asList( "A1", "A2" , "B3" )); // Afternoon Pricing
         cs.bookingPreview(show2, Arrays.asList( "A1", "A2" , "B3" )); // Evening Pricing
         cs.bookingPreview(show3, Arrays.asList( "A1", "A2" , "B3" )); // Evening Pricing + Weekends
+        cs.bookingPreview(show1, Arrays.asList( "A1", "A2" , "B12" )); // Invalid Seat
 
         //Confirm Booking
         cs.bookTicket(show1, Arrays.asList("A1", "A2" , "B3"));
+
+        cs.bookingPreview(show1, Arrays.asList( "A1", "A2" , "B3" )); // Already Booked Seat
 
         //Ticket Details
         cs.getTicketDetails();

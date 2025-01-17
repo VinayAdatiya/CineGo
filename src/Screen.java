@@ -23,9 +23,9 @@ public class Screen {
         int vipSeats = (int) (noOfSeats * 0.2); // 20% VIP seats
         for (int i = 1; i <= noOfSeats; i++) {
             if (i <= vipSeats) {
-                seats.add(new PremiumSeat("A" + i, 300.0));
+                seats.add(new PremiumSeat("A" + i, 300.0 , 0.12));
             } else {
-                seats.add(new RegularSeat("B" + i, 200.0));
+                seats.add(new RegularSeat("B" + i, 200.0 , 0.05));
             }
         }
         return seats;

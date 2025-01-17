@@ -11,7 +11,6 @@ public class Show {
     private Movie movie;
     private Screen screen;
     private List<Seat> seats;
-    private List<Booking> soldTickets;
 
     public Show(String showID, LocalDate showDate, LocalTime showTime, Movie movie, Screen screen) {
         this.showID = showID;
@@ -20,7 +19,6 @@ public class Show {
         this.movie = movie;
         this.screen = screen;
         this.seats = new ArrayList<>(screen.initializeSeats(screen.getNoOfSeats()));
-        this.soldTickets = new ArrayList<>();
     }
 
     public void displayShowDetails() {
@@ -133,13 +131,8 @@ public class Show {
         if (!alreadyBookedSeats.isEmpty()) {
             System.out.println("The following seats are already booked: " + String.join(", ", alreadyBookedSeats));
         }
-        Booking ticket = new Booking("BK"+random.nextInt(5000),show,seats,customer ,totalPrice + totalTax);
-        show.addTicket(ticket);
+        Booking ticket = new Booking("BK"+random.nextInt(5000),show,seats ,totalPrice + totalTax);
         customer.addTicket(ticket);
-    }
-
-    public void addTicket(Booking ticket) {
-        this.soldTickets.add(ticket);
     }
 
     public String getShowID() {

@@ -2,12 +2,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class PremiumSeat extends Seat {
-    private final double taxRate = 0.12;
     private double vipFees = 50.0;
     private double peakHourCharges = 50.0;
 
-    public PremiumSeat(String seatNumber, double price) {
-        super(seatNumber,price);
+    public PremiumSeat(String seatNumber, double price,double taxRate) {
+        super(seatNumber,price,taxRate);
     }
 
     @Override
@@ -24,11 +23,6 @@ public class PremiumSeat extends Seat {
             price += 100.0;
         }
         return price;
-    }
-
-    @Override
-    protected double calculateTaxes(double price) {
-        return price * taxRate;
     }
 
     @Override
