@@ -1,3 +1,5 @@
+package Theatre;
+
 public class MovieTeam {
     private String name;
     private String chName;

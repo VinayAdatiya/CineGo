@@ -1,5 +1,8 @@
+package Theatre;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Screen {
     private String screenID;
@@ -16,6 +19,19 @@ public class Screen {
         this.shows = new ArrayList<>();
         this.noOfSeats = noOfSeats;
         this.seats = initializeSeats(noOfSeats);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Screen screen = (Screen) o;
+        return screenID.equals(screen.screenID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(screenID);
     }
 
     public List<Seat> initializeSeats(int noOfSeats){

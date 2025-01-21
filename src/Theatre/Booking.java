@@ -1,3 +1,5 @@
+package Theatre;
+
 import java.util.List;
 
 public class Booking {
@@ -6,13 +8,11 @@ public class Booking {
     private Show show;
     private List<String> bookedSeats;
     private double totalPrice;
-//    private Users user;
 
     public Booking(String bookingID, Show show, List<String> bookedSeats,  double totalPrice) {
         this.bookingID = bookingID;
         this.show = show;
         this.bookedSeats = bookedSeats;
-//        this.user = user;
         this.totalPrice = totalPrice;
     }
 

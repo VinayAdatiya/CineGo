@@ -1,7 +1,10 @@
+package Theatre;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Movie {
 
@@ -16,6 +19,19 @@ public class Movie {
     private List<String> format;
     private List<MovieTeam> movieTeam;
     private List<Show> showList = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return movieID.equals(movie.movieID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieID);
+    }
 
     private Movie(Builder builder) {
         this.movieID = builder.movieID;
