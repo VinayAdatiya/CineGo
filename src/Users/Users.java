@@ -1,3 +1,7 @@
+package Users;
+
+import java.util.Objects;
+
 public abstract class Users {
     private String firstName;
     private String lastName;
@@ -17,5 +21,18 @@ public abstract class Users {
         this.emailID = emailID;
         this.city = city;
         this.pinCode = pinCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return Objects.equals(userName, users.userName) && Objects.equals(emailID, users.emailID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, emailID);
     }
 }

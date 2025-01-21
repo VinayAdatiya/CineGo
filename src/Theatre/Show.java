@@ -1,7 +1,13 @@
+package Theatre;
+
+import Exceptions.SeatAlreadyOccupiedException;
+import Exceptions.SeatNotFoundException;
+import Users.Customer;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class Show {
@@ -21,13 +27,26 @@ public class Show {
         this.seats = new ArrayList<>(screen.initializeSeats(screen.getNoOfSeats()));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Show show = (Show) o;
+        return showID.equals(show.showID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(showID);
+    }
+
     public void displayShowDetails() {
-        System.out.println("    Show ID: " + showID);
-        System.out.println("    Movie: " + movie.getTitle());
+        System.out.println("    Theatre.Show ID: " + showID);
+        System.out.println("    Theatre.Movie: " + movie.getTitle());
         System.out.println("    Date: " + showDate);
         System.out.println("    Time: " + showTime);
-        System.out.println("    Screen No: " + screen.getScreenID());
-        System.out.println("    Screen: " + screen.getScreenType());
+        System.out.println("    Theatre.Screen No: " + screen.getScreenID());
+        System.out.println("    Theatre.Screen: " + screen.getScreenType());
     }
 
     public int getAvailableSeats() {
@@ -41,19 +60,19 @@ public class Show {
     }
 
     public void displaySeats() {
-        System.out.println("Seats for Show ID: " + showID);
+        System.out.println("Seats for Theatre.Show ID: " + showID);
         for (Seat seat : seats) {
-            System.out.println("Seat: " + seat.getSeatNumber() + " | Type: " + seat.getSeatType() + " | Booked: " + seat.isBooked());
+            System.out.println("Theatre.Seat: " + seat.getSeatNumber() + " | Type: " + seat.getSeatType() + " | Booked: " + seat.isBooked());
         }
     }
 
-    public void bookingPreview(Show show , List<String> seats){
-        System.out.println("\n----------Booking Preview----------");
+    public void bookingPreview(Show show , List<String> seats) throws SeatNotFoundException , SeatAlreadyOccupiedException{
+        System.out.println("\n----------Theatre.Booking Preview----------");
         double totalPrice = 0;
         double totalTax = 0;
         List<String> alreadyBookedSeats = new ArrayList<>();
 
-        System.out.println("Seat || Base Price || Tax Amount || Total Price");
+        System.out.println("Theatre.Seat || Base Price || Tax Amount || Total Price");
         System.out.println("----------------------------------------------");
 
         for (String seatLabel : seats) {
@@ -77,7 +96,7 @@ public class Show {
                 }
             }
             if (!seatFound) {
-                System.out.println("Seat " + seatLabel + " not found in the system.");
+                throw new SeatNotFoundException("Theatre.Seat " + seatLabel + " not found in the system.");
             }
         }
 
@@ -85,18 +104,18 @@ public class Show {
         System.out.println("Grand Total :- "+ (totalPrice + totalTax));
 
         if (!alreadyBookedSeats.isEmpty()) {
-            System.out.println("The following seats are already booked: " + String.join(", ", alreadyBookedSeats));
+            throw new SeatAlreadyOccupiedException("The following seats are already booked: " + String.join(", ", alreadyBookedSeats));
         }
     }
 
-    public void bookTicket(Show show,List<String> seats,Customer customer){
+    public void bookTicket(Show show, List<String> seats, Customer customer) throws SeatAlreadyOccupiedException, SeatNotFoundException {
         Random random = new Random();
-        System.out.println("\n----------Booking Details----------");
+        System.out.println("\n----------Theatre.Booking Details----------");
         double totalPrice = 0;
         double totalTax = 0;
         List<String> alreadyBookedSeats = new ArrayList<>();
 
-        System.out.println("Seat || Base Price || Tax Amount || Total Price");
+        System.out.println("Theatre.Seat || Base Price || Tax Amount || Total Price");
         System.out.println("----------------------------------------------");
 
         for (String seatLabel : seats) {
@@ -121,7 +140,7 @@ public class Show {
                 }
             }
             if (!seatFound) {
-                System.out.println("Seat " + seatLabel + " not found in the system.");
+                throw new SeatNotFoundException("Theatre.Seat " + seatLabel + " not found in the system.");
             }
         }
 
@@ -129,7 +148,7 @@ public class Show {
         System.out.println("Grand Total :- "+ (totalPrice + totalTax));
 
         if (!alreadyBookedSeats.isEmpty()) {
-            System.out.println("The following seats are already booked: " + String.join(", ", alreadyBookedSeats));
+            throw new SeatAlreadyOccupiedException("The following seats are already booked: " + String.join(", ", alreadyBookedSeats));
         }
         Booking ticket = new Booking("BK"+random.nextInt(5000),show,seats ,totalPrice + totalTax);
         customer.addTicket(ticket);
